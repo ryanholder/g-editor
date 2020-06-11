@@ -1,15 +1,19 @@
 # g-editor
 
+```
+This is a modified version of g-editor from frontkom
+```
+
 A minimalist version of Gutenberg's editor. Ideal for checking your custom blocks.
 
-``` bash
+```bash
 npm install @frontkom/g-editor
 npm start
 ```
 
 You can include your custom block by passing its path in `BLOCK_DIR` env var.
 
-``` bash
+```bash
 BLOCK_DIR=\absolute\path\to\your-custom-block npm start
 ```
 
@@ -24,7 +28,6 @@ your-custom-block
   └── ...
 ```
 
-
 ## g-editor and Gutenberg-js
 
 Since version 1.0, `g-editor` no longer depends on `Gutenberg-js`.
@@ -36,10 +39,9 @@ It now includes the source `Gutenberg` packages directly.
 
 (check original packages order [here](https://github.com/WordPress/WordPress/blob/master/wp-includes/script-loader.php))
 
-
 ## Assets
 
 The sample videos are a courtesy of [Pixabay](https://pixabay.com/):
 
-  * [https://pixabay.com/en/videos/cute-cat-funny-cat-kitten-domestic-3092/](https://pixabay.com/en/videos/cute-cat-funny-cat-kitten-domestic-3092/)
-  * [https://pixabay.com/en/videos/cat-cat-thailand-small-indian-civet-1297/](https://pixabay.com/en/videos/cat-cat-thailand-small-indian-civet-1297/)
+- [https://pixabay.com/en/videos/cute-cat-funny-cat-kitten-domestic-3092/](https://pixabay.com/en/videos/cute-cat-funny-cat-kitten-domestic-3092/)
+- [https://pixabay.com/en/videos/cat-cat-thailand-small-indian-civet-1297/](https://pixabay.com/en/videos/cat-cat-thailand-small-indian-civet-1297/)
