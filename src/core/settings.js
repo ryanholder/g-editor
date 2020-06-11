@@ -8,7 +8,7 @@ window.userSettings = {
 
 // API settings
 window.wpApiSettings = {
-  root: window.location.origin + '/',
+  root: `${window.location.origin  }/`,
   nonce: '123456789',
   versionString: 'wp/v2/',
 };

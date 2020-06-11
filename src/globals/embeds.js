@@ -1,17 +1,19 @@
+/* eslint-disable camelcase */
 import providers from 'oembed-providers';
 
-export async function getEmbed (url) {
+export async function getEmbed(url) {
   // Proxy that we use that enables cross-origin requests
   // https://cors-anywhere.herokuapp.com/
+
   const cors_api_host = 'https://cors-anywhere.herokuapp.com/';
-  const hostname = (new URL(url)).hostname;
+  const { hostname } = new URL(url);
 
   // Find the provider
-  const provider = providers.find(({ provider_url }) => {
-    return provider_url.includes(hostname) || hostname.includes(provider_url);
-  });
+  const provider = providers.find(
+    ({ provider_url }) => provider_url.includes(hostname) || hostname.includes(provider_url),
+  );
 
-  if(provider && provider.endpoints) {
+  if (provider && provider.endpoints) {
     // Use the first endpoint
     const provider_url = provider.endpoints[0].url;
 

@@ -7,13 +7,14 @@ import './core';
 import Editor from './pages/editor';
 import Preview from './pages/preview';
 
-ReactDOM.render((
+ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path="/preview" component={ Preview } />
-      <Route exact path="/posts" component={ Editor } />
-      <Route exact path="/pages" component={ Editor } />
-      <Route component={ Editor } />
+      <Route exact path="/preview" component={Preview} />
+      <Route exact path="/posts" component={Editor} />
+      <Route exact path="/pages" component={Editor} />
+      <Route component={Editor} />
     </Switch>
-  </BrowserRouter>
-), document.getElementById('root'));
+  </BrowserRouter>,
+  document.getElementById('root')
+);

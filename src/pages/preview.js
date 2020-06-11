@@ -1,11 +1,11 @@
+/* eslint-disable import/named */
 import React from 'react';
 import { getPage } from '../globals/fake-data';
 
 const { domReady } = window.wp;
 
-
 class Preview extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -13,7 +13,8 @@ class Preview extends React.Component {
     };
   }
 
-  componentWillMount () {
+  // eslint-disable-next-line react/no-deprecated
+  componentWillMount() {
     // remove block editor style from page
     const editorStyle = document.querySelector('style[id="block-editor-style"]');
     if (editorStyle) {
@@ -27,12 +28,11 @@ class Preview extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const page = getPage();
-    const rendered = (
-      page && page.content && page.content.raw &&
-      page.content.raw.replace(/(<!--.*?-->)/g, '')
-    ) || '';
+    const rendered =
+      (page && page.content && page.content.raw && page.content.raw.replace(/(<!--.*?-->)/g, '')) ||
+      '';
 
     this.setState({
       rendered,
@@ -55,7 +55,8 @@ class Preview extends React.Component {
       container.innerHTML = html;
 
       const scripts = container.getElementsByTagName('script');
-      for(const s of scripts) {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const s of scripts) {
         const script = document.createElement('script');
         script.type = 'text/javascript';
         script.async = true;
@@ -64,8 +65,7 @@ class Preview extends React.Component {
           // inner script
           const frontendScript = Buffer.from(s.innerText).toString('base64');
           script.src = `data:text/javascript;base64,${frontendScript}`;
-        }
-        else {
+        } else {
           // or from external src
           script.src = s.src;
         }
@@ -75,11 +75,16 @@ class Preview extends React.Component {
     });
   }
 
-  render () {
+  render() {
     const { rendered } = this.state;
-    return rendered ?
-      <div dangerouslySetInnerHTML={{ __html: rendered }} /> :
-      <center><em>Add your custom block in the editor</em></center>;
+    return rendered ? (
+      // eslint-disable-next-line react/no-danger
+      <div dangerouslySetInnerHTML={{ __html: rendered }} />
+    ) : (
+      <center>
+        <em>Add your custom block in the editor</em>
+      </center>
+    );
   }
 }
 

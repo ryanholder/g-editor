@@ -1,4 +1,4 @@
-
+/* eslint-disable import/named */
 import { getPage, savePage, deletePage } from './fake-data.js';
 import { mediaList, createMedia } from './fake-media.js';
 import { getEmbed } from './embeds.js';
@@ -9,23 +9,19 @@ import categories from '../data/categories';
 import types from '../data/types';
 import themes from '../data/themes';
 
-
 export default [
   // Pages and posts
   {
     path: '/wp/v2/pages',
     method: '*',
-    handler () {
-      return [ getPage() ];
+    handler() {
+      return [getPage()];
     },
   },
   {
-    path: [
-      '/wp/v2/pages/{id}',
-      '/wp/v2/pages/{id}/autosaves',
-    ],
+    path: ['/wp/v2/pages/{id}', '/wp/v2/pages/{id}/autosaves'],
     method: ['POST', 'PUT'],
-    handler ({ payload }) {
+    handler({ payload }) {
       savePage(payload);
       return getPage();
     },
@@ -33,18 +29,15 @@ export default [
   {
     path: '/wp/v2/pages/{id}',
     method: 'DELETE',
-    handler () {
+    handler() {
       deletePage();
       return {};
     },
   },
   {
-    path: [
-      '/wp/v2/pages/{id}',
-      '/wp/v2/pages/{id}/autosaves',
-    ],
+    path: ['/wp/v2/pages/{id}', '/wp/v2/pages/{id}/autosaves'],
     method: '*',
-    handler () {
+    handler() {
       return getPage();
     },
   },
@@ -52,36 +45,30 @@ export default [
   {
     path: '/wp/v2/posts',
     method: '*',
-    handler () {
-      return [ getPage('post') ];
+    handler() {
+      return [getPage('post')];
     },
   },
   {
     path: '/wp/v2/posts/{id}',
     method: 'DELETE',
-    handler () {
+    handler() {
       deletePage();
       return {};
     },
   },
   {
-    path: [
-      '/wp/v2/posts/{id}',
-      '/wp/v2/posts/{id}/autosaves',
-    ],
+    path: ['/wp/v2/posts/{id}', '/wp/v2/posts/{id}/autosaves'],
     method: ['POST', 'PUT'],
-    handler ({ payload }) {
+    handler({ payload }) {
       savePage(payload);
       return getPage('post');
     },
   },
   {
-    path: [
-      '/wp/v2/posts/{id}',
-      '/wp/v2/posts/{id}/autosaves',
-    ],
+    path: ['/wp/v2/posts/{id}', '/wp/v2/posts/{id}/autosaves'],
     method: '*',
-    handler () {
+    handler() {
       return getPage('post');
     },
   },
@@ -90,11 +77,13 @@ export default [
   {
     path: '/wp/v2/media',
     method: 'OPTIONS',
-    handler () {
+    handler() {
       return {
         headers: {
-          get (value) {
-            if (value === 'allow') { return [ 'POST' ]; }
+          get(value) {
+            if (value === 'allow') {
+              return ['POST'];
+            }
           },
         },
       };
@@ -103,39 +92,39 @@ export default [
   {
     path: '/wp/v2/media',
     method: 'POST',
-    async handler ({ payload }) {
+    async handler({ payload }) {
       const file = payload.get('file');
+      // eslint-disable-next-line no-return-await
       return file ? await createMedia(file) : {};
     },
   },
   {
     path: '/wp/v2/media',
     method: '*',
-    handler () {
+    handler() {
       return mediaList;
     },
   },
   {
     path: '/wp/v2/media/{id}',
     method: '*',
-    handler ({ params }) {
+    handler({ params }) {
       return mediaList[+params.id - 1];
     },
   },
-
 
   // Types
   {
     path: '/wp/v2/types',
     method: '*',
-    handler () {
+    handler() {
       return types;
     },
   },
   {
     path: '/wp/v2/types/{type}',
     method: '*',
-    handler ({ params }) {
+    handler({ params }) {
       return types[params.type] || {};
     },
   },
@@ -144,7 +133,7 @@ export default [
   {
     path: '/wp/v2/blocks',
     method: '*',
-    handler () {
+    handler() {
       return [];
     },
   },
@@ -153,7 +142,7 @@ export default [
   {
     path: '/wp/v2/themes',
     method: '*',
-    handler () {
+    handler() {
       return themes;
     },
   },
@@ -162,14 +151,14 @@ export default [
   {
     path: '/wp/v2/taxonomies',
     method: '*',
-    handler () {
+    handler() {
       return new window.Response(JSON.stringify(taxonomies));
     },
   },
   {
     path: '/wp/v2/taxonomies/{type}',
     method: '*',
-    handler ({ params }) {
+    handler({ params }) {
       return taxonomies[params.type] || {};
     },
   },
@@ -178,7 +167,7 @@ export default [
   {
     path: '/wp/v2/categories',
     method: '*',
-    handler () {
+    handler() {
       return categories;
     },
   },
@@ -187,14 +176,14 @@ export default [
   {
     path: '/wp/v2/users/',
     method: '*',
-    handler () {
+    handler() {
       return new window.Response(JSON.stringify(users));
     },
   },
   {
     path: '/wp/v2/users/{name}',
     method: '*',
-    handler () {
+    handler() {
       return users[0] || {};
     },
   },
@@ -203,7 +192,7 @@ export default [
   {
     path: '/wp/v2/block-renderer/{block*}',
     method: '*',
-    handler ({ params }) {
+    handler({ params }) {
       return {
         rendered: `<div>Sorry. There is no server-side rendering available for "${params.block}".</div>`,
       };
@@ -214,7 +203,7 @@ export default [
   {
     path: '/wp/v2/search',
     method: '*',
-    handler () {
+    handler() {
       return [];
     },
   },
@@ -223,7 +212,7 @@ export default [
   {
     path: '/oembed/1.0/proxy',
     method: '*',
-    handler ({ query }) {
+    handler({ query }) {
       return getEmbed(query.url);
     },
   },
