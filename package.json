@@ -1,8 +1,8 @@
 {
-  "name": "@dauntless/g-editor",
+  "name": "da-g-editor",
   "version": "1.5.0",
   "description": "A minimalist version of Gutenberg's editor. Ideal for testing custom blocks.",
-  "author": "Dauntless",
+  "author": "Ryan Holder",
   "private": false,
   "main": "build/index.js",
   "files": [
