@@ -1,5 +1,7 @@
 import apiFetch from '../globals/api-fetch';
 
+console.log(window);
+
 const { use, createNonceMiddleware, createRootURLMiddleware, setFetchHandler } = window.wp.apiFetch;
 
 const nonceMiddleware = createNonceMiddleware(window.wpApiSettings.nonce);
